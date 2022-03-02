@@ -63,6 +63,17 @@ const loadPhoneDetail = phoneId => {
 const displayPhoneDetail = phone => {
     phoneDetails.textContent = '';
     const div = document.createElement('div');
+    // Main Features veriable load
+    const phoneName = phone?.name === undefined ? "no data available" : phone.name;
+    const phoneBrand = phone.brand === undefined ? "no data available" : phone.brand;
+    const phoneReleaseDate = phone.releaseDate === undefined || phone.releaseDate === "" ? " No Release Date Found " : phone.releaseDate;
+    // Other Features veriable load
+    const bluetooth = phone?.others?.Bluetooth === undefined ? "no data available" : phone.others.Bluetooth;
+    const gps = phone?.others?.GPS === undefined ? "no data available" : phone.others.GPS;
+    const nfc = phone?.others?.NFC === undefined ? "no data available" : phone.others.NFC;
+    const radio = phone?.others?.Radio === undefined ? "no data available" : phone.others.Radio;
+    const usb = phone?.others?.USB === undefined ? "no data available" : phone.others.USB;
+    const wlan = phone?.others?.WLAN === undefined ? "no data available" : phone.others.WLAN;
     div.classList.add('card');
     div.innerHTML = `
         <div class="card h-100 px-1 py-3 shadow rounded d-md-flex flex-md-row">
@@ -70,9 +81,9 @@ const displayPhoneDetail = phone => {
                 <img  src="${phone.image}" class="card-img-top  m-auto " alt="...">
             </div>
             <div class="card-body w-50">
-                <h5 class="card-title fw-normal">Name: ${phone.name}</h5>
-                <p class="card-text fw-normal">Brand: ${phone.brand}</p>
-                <p class="card-text">ReleaseDate: ${phone.releaseDate}</p>
+                <h5 class="card-title fw-normal">Name: ${phoneName}</h5>
+                <p class="card-text fw-normal">Brand: ${phoneBrand}</p>
+                <p class="card-text">ReleaseDate: ${phoneReleaseDate}</p>
                 <h5 class="card-title fw-normal">Main Features</h5>
                 <p class="card-text">Storage: ${phone.mainFeatures.storage}</p>
                 <p class="card-text">Display Size: ${phone.mainFeatures.displaySize}</p>
@@ -81,12 +92,14 @@ const displayPhoneDetail = phone => {
                 <p class="card-text">Storage: ${phone.mainFeatures.storage}</p>
                 <p class="card-text">Sensors: ${phone.mainFeatures.sensors}</p>
                 <h5 class="card-title fw-normal"> Other Features </h5>
-                <p class="card-text">Bluetooth: ${phone.others.Bluetooth}</p>
-                <p class="card-text">GPS: ${phone.others.GPS}</p>
-                <p class="card-text">NFC: ${phone.others.NFC}</p>
-                <p class="card-text">Radio: ${phone.others.Radio}</p>
-                <p class="card-text">USB: ${phone.others.USB}</p>
-                <p class="card-text">WLAN: ${phone.others.WLAN}</p>
+                <p class="card-text">Bluetooth: ${bluetooth} </p>
+                <p class="card-text">GPS: ${gps} </p>
+                <p class="card-text">NFC: ${nfc} </p>
+                <p class="card-text">Radio: ${radio} </p>
+                <p class="card-text">USB: ${usb} </p>
+                <p class="card-text">WLAN: ${wlan} </p>
+                
+               
                
             </div >
 
