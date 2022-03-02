@@ -76,11 +76,11 @@ const displayPhoneDetail = phone => {
     const wlan = phone?.others?.WLAN === undefined ? "no data available" : phone.others.WLAN;
     div.classList.add('card');
     div.innerHTML = `
-        <div class="card h-100 px-1 py-3 shadow rounded d-md-flex flex-md-row">
-            <div class="w-50">
+        <div class="card h-100 p-3 shadow rounded d-md-flex flex-md-row">
+            <div class="details-card-image">
                 <img  src="${phone.image}" class="card-img-top  m-auto " alt="...">
             </div>
-            <div class="card-body w-50">
+            <div class="card-body details-card-info">
                 <h5 class="card-title fw-normal">Name: ${phoneName}</h5>
                 <p class="card-text fw-normal">Brand: ${phoneBrand}</p>
                 <p class="card-text">ReleaseDate: ${phoneReleaseDate}</p>
