@@ -1,3 +1,4 @@
+/* details card sizeing */
 .details-card-image{
     width: 40%;
 }
@@ -18,9 +19,4 @@
     #phone-details{
         width: 100%;
     }
-}
-/* Media queries Tablet*/
-@media only screen and (min-width: 689px) and (max-width:992px) {
- 
-
 }

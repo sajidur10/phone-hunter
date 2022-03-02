@@ -1,38 +1,55 @@
-document.getElementById('error-message').style.display = 'none';
-document.getElementById('error-message-not-found').style.display = 'none';
-document.getElementById('error-message-null').style.display = 'none';
+// Error Message Control function start 
+const errorMessageControl = (errorMessageId, displayOption) => {
+    document.getElementById(errorMessageId).style.display = displayOption;
+}
+// Error Message Control function end
+// Error Message hide on body start 
+errorMessageControl('error-message', 'none');
+errorMessageControl('error-message-not-found', 'none');
+errorMessageControl('error-message-null', 'none');
+// Error Message hide on body end
+// searchPhone function start
 const phoneDetails = document.getElementById('phone-details');
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    // clear data
+    // clear data search Field start
     searchField.value = '';
-    document.getElementById('error-message').style.display = 'none';
-    document.getElementById('error-message-not-found').style.display = 'none';
-    document.getElementById('error-message-null').style.display = 'none';
+    // clear data search Field end
+    // Error Message hide on searchPhone start 
+    errorMessageControl('error-message', 'none');
+    errorMessageControl('error-message-not-found', 'none');
+    errorMessageControl('error-message-null', 'none');
+    // Error Message hide on searchPhone end
+    // searchPhone function start
     if (searchText == '') {
-        document.getElementById('error-message-null').style.display = 'block';
+        errorMessageControl('error-message-null', 'block');
     }
     else {
-        // load data
+        // load data start on searchPhone
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
             .then(res => res.json())
             .then(data => displaySearchResult(data.data))
             .catch(error => displayError(error));
+        // load data end on searchPhone
     }
 }
-
+// searchPhone function end
+//  displayError function start 
 const displayError = error => {
-    document.getElementById('error-message').style.display = 'block';
+    errorMessageControl('error-message', 'block');
 }
-
+//  displayError function send 
+// displaySearchResult function start 
 const displaySearchResult = phones => {
     const searchResult = document.getElementById('search-result');
+    // clear data search Field start
     searchResult.textContent = '';
     phoneDetails.textContent = '';
+    // clear data search Field end
     if (phones.length == 0) {
-        document.getElementById('error-message-not-found').style.display = 'block';
+        errorMessageControl('error-message-not-found', 'block');
     }
     phones.slice(0, 20).forEach(phone => {
         const div = document.createElement('div');
@@ -52,28 +69,32 @@ const displaySearchResult = phones => {
         searchResult.appendChild(div);
     })
 }
-
+// displaySearchResult function end 
+// loadPhoneDetail function start 
 const loadPhoneDetail = phoneId => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhoneDetail(data.data));
 }
-
+// loadPhoneDetail function end
+// displayPhoneDetail function start
 const displayPhoneDetail = phone => {
     phoneDetails.textContent = '';
     const div = document.createElement('div');
-    // Main Features veriable load
+    // Main Features veriable load start
     const phoneName = phone?.name === undefined ? "no data available" : phone.name;
     const phoneBrand = phone.brand === undefined ? "no data available" : phone.brand;
     const phoneReleaseDate = phone.releaseDate === undefined || phone.releaseDate === "" ? " No Release Date Found " : phone.releaseDate;
-    // Other Features veriable load
+    // Main Features veriable load end
+    // Other Features veriable load start
     const bluetooth = phone?.others?.Bluetooth === undefined ? "no data available" : phone.others.Bluetooth;
     const gps = phone?.others?.GPS === undefined ? "no data available" : phone.others.GPS;
     const nfc = phone?.others?.NFC === undefined ? "no data available" : phone.others.NFC;
     const radio = phone?.others?.Radio === undefined ? "no data available" : phone.others.Radio;
     const usb = phone?.others?.USB === undefined ? "no data available" : phone.others.USB;
     const wlan = phone?.others?.WLAN === undefined ? "no data available" : phone.others.WLAN;
+    // Other Features veriable load end
     div.classList.add('card');
     div.innerHTML = `
         <div class="card h-100 p-3 shadow rounded d-md-flex flex-md-row">
@@ -97,15 +118,9 @@ const displayPhoneDetail = phone => {
                 <p class="card-text">NFC: ${nfc} </p>
                 <p class="card-text">Radio: ${radio} </p>
                 <p class="card-text">USB: ${usb} </p>
-                <p class="card-text">WLAN: ${wlan} </p>
-                
-               
-               
+                <p class="card-text">WLAN: ${wlan} </p>   
             </div >
-
-
-        </div >
-
-    `;
+        </div >`;
     phoneDetails.appendChild(div);
 }
+// displayPhoneDetail function end
